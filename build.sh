@@ -1,6 +1,6 @@
-set -ex
-
 #!/bin/bash
+
+set -ex
 
 # Get the current Go version
 current_version=$(go version | awk '{print $3}' | sed 's/go//')
@@ -24,5 +24,3 @@ go env -w CGO_ENABLED="0"
 git fetch --tags
 go build -ldflags="-X 'main.version=$(git describe --tags $(git rev-list --tags --max-count=1))'" -o ~/go/bin/griddriver .
 echo build ok
-
-sudo cp ~/go/bin/griddriver /usr/local/bin
